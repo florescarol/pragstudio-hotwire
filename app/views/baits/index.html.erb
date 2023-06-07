@@ -2,7 +2,7 @@
   <%= form_with(
       url: baits_path,
       method: :get,
-      data: { turbo_frame: "baits_results" }
+      data: { turbo_frame: "baits_results", controller: "form", action: "input->form#submit" }
     ) do |f| %>
     <div>
       <%= f.search_field :name, placeholder: 'Name...',
@@ -16,9 +16,6 @@
       <%= f.select :sort,
             [["By Name", "name"], ["By Popularity", "tackle_box_items_count"]],
             include_blank: "Sort By", selected: params[:sort] %>
-    </div>
-    <div>
-      <%= f.submit "Search" %>
     </div>
   <% end %>
 </div>
