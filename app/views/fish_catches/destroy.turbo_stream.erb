@@ -1,3 +1,8 @@
 <%= render_update_stats_stream(@fish_catches) %>
 
 <%= turbo_stream.remove @fish_catch %>
+
+<%= turbo_stream.update "flash",
+  partial: "layouts/flash",
+  locals: { flash: flash }
+%>
