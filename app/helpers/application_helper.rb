@@ -28,4 +28,9 @@ module ApplicationHelper
   def current_second
     "00:#{Time.now.strftime('%S')}"
   end
+
+  def render_flash_stream
+    turbo_stream.update "flash", "layouts/flash"
+  end
+
 end
