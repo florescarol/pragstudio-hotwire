@@ -18,10 +18,16 @@ class FishCatchesController < ApplicationController
   end
 
   def update
-    if @fish_catch.update(fish_catch_params)
-      @fish_catches = fish_catches_for_bait(@fish_catch.bait)
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @fish_catch.update(fish_catch_params)
+        format.turbo_stream do
+          @fish_catches = fish_catches_for_bait(@fish_catch.bait)
+        end
+
+        format.html { redirect_to tackle_box_item_for_catch(@fish_catch) }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
