@@ -8,6 +8,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
             uniqueness: { case_sensitive: false }
 
+  broadcasts_to ->(user) { "users" }, inserts_by: :prepend
+
   def filter_catches(params={})
     associations = {"bait" => "baits.name"}
 
